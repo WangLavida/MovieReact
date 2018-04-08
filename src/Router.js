@@ -9,12 +9,25 @@ import {
     Text,
     View
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import MainView from './view/MainView'
+import SideMenu from './view/SideMenu'
 
+const Drawer = DrawerNavigator({
+    MainView: {
+        screen: MainView,
+        navigationOptions:{
+            header:null
+        }
+    }
+}, {
+    contentComponent: SideMenu
+})
 export default Router = StackNavigator({
-    Mian: {
-        screen: MainView
+    Home: {
+        screen: Drawer,
+        navigationOptions:{
+            header:null
+        }
     }
 })
-
