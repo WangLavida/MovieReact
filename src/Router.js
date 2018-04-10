@@ -53,7 +53,7 @@ const Tab = TabNavigator({
     About: {
         screen: AboutView,
         navigationOptions: ({navigation}) => ({
-                title:"工具",
+                title:"关于",
                 tabBarLabel: "关于",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
