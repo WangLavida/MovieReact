@@ -37,6 +37,7 @@ const Tab = TabNavigator({
     Tools: {
         screen: ToolsView,
         navigationOptions: ({navigation}) => ({
+                title:"工具",
                 tabBarLabel: "工具",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
@@ -69,42 +70,28 @@ const Tab = TabNavigator({
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     lazy: true,
-    animationEnabled: false,
-    swipeEnabled: false,
+    animationEnabled: true,
+    swipeEnabled: true,
     tabBarOptions: {
-        showLabel:true
         // activeTintColor: color.primary,
         // inactiveTintColor: color.gray,
         // style: {backgroundColor: '#ffffff'},
     },
 })
+const Stack = StackNavigator({
+    Tab: {
+        screen: Tab,
+    }
+})
 export default Drawer = DrawerNavigator({
     Splash: {
         screen: Splash,
-        // navigationOptions: {
-        //     header: null
-        // }
     },
     Drawer: {
-        screen: Tab,
+        screen: Stack,
     }
 }, {
-    initialRouteName: 'Drawer',
+    initialRouteName: 'Splash',
     contentComponent: SideMenu
 })
-// const Router = StackNavigator({
-//     Splash:{
-//         screen:Splash,
-//         navigationOptions: {
-//             header: null
-//         }
-//     },
-//     Home: {
-//         screen: Drawer,
-//         navigationOptions: {
-//             header: null
-//         }
-//     }
-// },{
-//     initialRouteName: 'Splash',
-// })
+
