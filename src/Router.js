@@ -17,6 +17,7 @@ import ToolsView from './view/ToolsView'
 import AboutView from './view/AboutView'
 import TabBarItem from './componet/TabBarItem'
 import Splash from './view/Splash'
+import color from './style/color'
 
 const Tab = TabNavigator({
     Movie: {
@@ -37,7 +38,7 @@ const Tab = TabNavigator({
     Tools: {
         screen: ToolsView,
         navigationOptions: ({navigation}) => ({
-                title:"工具",
+                title: "工具",
                 tabBarLabel: "工具",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
@@ -53,7 +54,7 @@ const Tab = TabNavigator({
     About: {
         screen: AboutView,
         navigationOptions: ({navigation}) => ({
-                title:"关于",
+                title: "关于",
                 tabBarLabel: "关于",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
@@ -74,9 +75,9 @@ const Tab = TabNavigator({
     animationEnabled: true,
     swipeEnabled: true,
     tabBarOptions: {
-        // activeTintColor: color.primary,
-        // inactiveTintColor: color.gray,
-        // style: {backgroundColor: '#ffffff'},
+        activeTintColor: color.colorPrimary,
+        inactiveTintColor: color.dividerText,
+        style: {backgroundColor: '#ffffff'},
     },
 })
 const Stack = StackNavigator({
@@ -92,7 +93,7 @@ export default Drawer = DrawerNavigator({
         screen: Stack,
     }
 }, {
-    initialRouteName: 'Splash',
+    initialRouteName: 'Drawer',
     contentComponent: SideMenu
 })
 
