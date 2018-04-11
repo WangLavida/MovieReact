@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import color from '../style/color'
 import NavigationItem from '../componet/NavigationItem'
-
+import constant from '../common/constant'
 export default class MovieView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '电影',
@@ -28,6 +28,17 @@ export default class MovieView extends Component<Props> {
         }
     )
 
+    componentDidMount() {
+        console.log("HAHA");
+        fetch(constant.hotCities,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response)=>{
+           console.log(response);
+        });
+    }
     render() {
         return (
             <View>
