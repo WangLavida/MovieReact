@@ -85,15 +85,26 @@ const Stack = StackNavigator({
         screen: Tab,
     }
 })
-export default Drawer = DrawerNavigator({
-    Splash: {
-        screen: Splash,
-    },
+const Drawer = DrawerNavigator({
     Drawer: {
         screen: Stack,
     }
 }, {
     initialRouteName: 'Drawer',
     contentComponent: SideMenu
+})
+export default Start = StackNavigator({
+    Splash: {
+        screen: Splash,
+        navigationOptions: {
+            header: null
+        }
+    },
+    DrawerMain: {
+        screen: Drawer,
+        navigationOptions: {
+            header: null
+        }
+    }
 })
 
