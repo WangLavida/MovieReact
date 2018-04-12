@@ -9,6 +9,8 @@ import {
 import color from '../style/color'
 import NavigationItem from '../componet/NavigationItem'
 import constant from '../common/constant'
+import http from '../common/http'
+
 export default class MovieView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '电影',
@@ -29,16 +31,15 @@ export default class MovieView extends Component<Props> {
     )
 
     componentDidMount() {
-        console.log("HAHA");
-        fetch(constant.hotCities,{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((response)=>{
-           console.log(response);
+        http.post("获取城市", constant.hotCities, null, () => {
+            console.log("开发发送请求");
+        }, (response) => {
+            console.log(JSON.stringify(response));
+        }, (error) => {
+
         });
     }
+
     render() {
         return (
             <View>
