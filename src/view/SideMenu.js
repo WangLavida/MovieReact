@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import color from "../style/color"
 import MenuItem from "../componet/MenuItem"
-import {toast} from "../common/tool"
 import {
     DrawerNavigator ,
     DrawerItems ,
@@ -24,7 +23,6 @@ export default class SideMenu extends Component {
     }
 
     homeClick() {
-        // toast("HOME");
         navigation.navigate('DrawerClose');
     }
 
