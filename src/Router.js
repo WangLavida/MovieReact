@@ -106,5 +106,7 @@ export default Start = StackNavigator({
             header: null
         }
     }
+}, {
+    initialRouteName: 'DrawerMain',
 })
 

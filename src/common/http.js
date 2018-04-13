@@ -41,7 +41,17 @@ export default class http {
         });
     }
 
-    static get(TAG, url, loadCallBack, callBackSuccess, callBackError) {
+    static get(TAG, url, formData, loadCallBack, callBackSuccess, callBackError) {
+        // var formData = parames.entries();
+        // var formItem;
+        // url = url + "?";
+        // while (formItem = formData.next()) {
+        //     if (formItem.done) {
+        //         break;
+        //     }
+        //     url = url + formItem.value[0] + "=" + formItem.value[1] + "&";
+        // }
+        console.log("formdata", formData);
         console.log("start===" + TAG + url);
         loadCallBack();
         fetch(url, {

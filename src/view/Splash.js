@@ -49,7 +49,7 @@ export default class Splash extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar hidden={true}/>
+                {/*<StatusBar hidden={true}/>*/}
                 <ImageBackground source={require("../image/splash.jpg")}
                                  style={style.imageBg} resizeMode='stretch'>
                     <TouchableHighlight style={style.touchBg} onPress={this.initMian.bind(this)}>
@@ -70,7 +70,7 @@ const style = StyleSheet.create({
         margin: 20,
         height: 30,
         backgroundColor: color.dividerText,
-        opacity: 4,
+        opacity: 1,
         borderRadius: 20,
         justifyContent: 'center',
         borderColor: color.colorPrimary,

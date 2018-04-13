@@ -31,7 +31,8 @@ export default class MovieView extends Component<Props> {
     )
 
     componentDidMount() {
-        http.post("获取城市", constant.hotCities, null, () => {
+        let formData = new FormData();
+        http.get("即将上映", constant.comingNew, formData, () => {
             console.log("开发发送请求");
         }, (response) => {
             console.log(JSON.stringify(response));
