@@ -32,7 +32,7 @@ export default class MovieView extends Component<Props> {
 
     componentDidMount() {
         var params = new Map();
-        params.set("locationId", "200");
+        params.set("locationId", "295");
         http.post("即将上映", constant.comingNew, params, () => {
         }, (response) => {
         }, (error) => {
