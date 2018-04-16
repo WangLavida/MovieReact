@@ -8,9 +8,21 @@ import {
 } from 'react-native';
 
 export default class http {
-    static post(TAG, url, parames, loadCallBack, callBackSuccess, callBackError) {
-        console.log("start===" + TAG + url);
+    static post(TAG, url, params, loadCallBack, callBackSuccess, callBackError) {
         loadCallBack();
+
+        console.log("start===" + TAG + url);
+
+        let bodyStr = "";
+        let formData = new FormData();
+        if (params.size > 0) {
+            for (var item of params.entries()) {
+                bodyStr = bodyStr + item[0] + "=" + item[1] + "&";
+                formData.append(item[0], item[1]);
+            }
+            console.log("请求参数===" + bodyStr);
+        }
+
         fetch(url, {
             method: 'POST',//如果为GET方式，则不要添加body，否则会出错    GET/POST
             header: {//请求头
@@ -18,7 +30,7 @@ export default class http {
                 'Content-Type': 'application/json'
             },
             //请求参数
-            body: parames
+            body: formData
         }).then((response) => {
             //将数据转成json,也可以转成 response.text、response.html
             if (response.ok) {
@@ -41,17 +53,14 @@ export default class http {
         });
     }
 
-    static get(TAG, url, formData, loadCallBack, callBackSuccess, callBackError) {
-        // var formData = parames.entries();
-        // var formItem;
-        // url = url + "?";
-        // while (formItem = formData.next()) {
-        //     if (formItem.done) {
-        //         break;
-        //     }
-        //     url = url + formItem.value[0] + "=" + formItem.value[1] + "&";
-        // }
-        console.log("formdata", formData);
+    static get(TAG, url, params, loadCallBack, callBackSuccess, callBackError) {
+        console.log(params.size);
+        if (params.size > 0) {
+            url = url + "?";
+            for (var item of params.entries()) {
+                url = url + item[0] + "=" + item[1] + "&";
+            }
+        }
         console.log("start===" + TAG + url);
         loadCallBack();
         fetch(url, {

@@ -31,11 +31,10 @@ export default class MovieView extends Component<Props> {
     )
 
     componentDidMount() {
-        let formData = new FormData();
-        http.get("即将上映", constant.comingNew, formData, () => {
-            console.log("开发发送请求");
+        var params = new Map();
+        params.set("locationId", "200");
+        http.post("即将上映", constant.comingNew, params, () => {
         }, (response) => {
-            console.log(JSON.stringify(response));
         }, (error) => {
 
         });
