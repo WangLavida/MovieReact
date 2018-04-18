@@ -82,8 +82,8 @@ export default class MovieView extends Component<Props> {
     }
 
     swiperView() {
-        if (this.state.swiperList != null) {
-            return <Carousel
+        return this.state.swiperList != null &&
+            <Carousel
                 delay={4000}
                 style={{width: screen.width, height: 170}}
                 autoplay={true}
@@ -107,20 +107,19 @@ export default class MovieView extends Component<Props> {
                                }}></Image></TouchableHighlight>
                 })}
             </Carousel>
-        } else {
-            return null;
-        }
     }
 
     renderItemView({item}) {
         return <HotItem img={item.img}/>
     }
+
     sepa() {
-        return (<View style={{width:5}}></View>)
+        return (<View style={{width: 5}}></View>)
     }
+
     hotView() {
-        if (this.state.hotList != null) {
-            return <FlatList
+        return this.state.hotList != null &&
+            <FlatList
                 ItemSeparatorComponent={this.sepa}
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
                 data={this.state.hotList}
@@ -128,9 +127,6 @@ export default class MovieView extends Component<Props> {
                 renderItem={this.renderItemView}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}></FlatList>
-        } else {
-            return null;
-        }
     }
 
     render() {
