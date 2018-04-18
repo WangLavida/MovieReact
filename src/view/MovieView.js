@@ -5,13 +5,17 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    Image
+    Image,
+    TouchableHighlight,
+    FlatList
 } from 'react-native';
 import color from '../style/color'
 import NavigationItem from '../componet/NavigationItem'
 import constant from '../common/constant'
 import http from '../common/http'
-import Swiper from 'react-native-swiper';
+import screen from '../common/screen'
+import Carousel from 'react-native-looped-carousel';
+import HotItem from '../componet/HotItem'
 
 export default class MovieView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
@@ -35,7 +39,10 @@ export default class MovieView extends Component<Props> {
     constructor(props) {
         super();
         this.state = {
-            swiperList: null
+            swiperList: null,
+            hotList: null,
+            hotData: null,
+            swiperWidth: 0
         }
     }
 
@@ -45,28 +52,92 @@ export default class MovieView extends Component<Props> {
         http.post("即将上映", constant.comingNew, params, () => {
         }, (response) => {
             this.setState({
-                swiperList: response.attention.slice(0, 6)
+                swiperList: response.attention.slice(0, 5)
+            });
+        }, (error) => {
+
+        });
+        http.post("正在售票", constant.hotMovies, params, () => {
+        }, (response) => {
+            let dataBlob = [];
+            let i = 0;
+            response.movies.map(function (item) {
+                dataBlob.push({
+                    key: i,
+                    value: item.img,
+                })
+                i++;
+            });
+            this.setState({
+                hotList: response.movies,
+                hotData: dataBlob
             });
         }, (error) => {
 
         });
     }
 
+    swiperClick(id) {
+        console.log(id);
+    }
+
+    swiperView() {
+        if (this.state.swiperList != null) {
+            return <Carousel
+                delay={4000}
+                style={{width: screen.width, height: 170}}
+                autoplay={true}
+                pageInfo={false}
+                bullets={true}
+                bulletStyle={{backgroundColor: color.colorPrimaryDark, width: 5, height: 5}}
+                chosenBulletStyle={{backgroundColor: color.colorPrimary, width: 5, height: 5}}
+            >
+                {this.state.swiperList.map((item, i) => {
+                    let path = item.videos[0].image;
+                    console.log(path);
+                    return <TouchableHighlight onPress={this.swiperClick.bind(this, item.id)} key={i}>
+                        <Image resizeMode="stretch"
+                               style={{
+                                   width: screen.width,
+                                   height: 170
+                               }}
+                               source={{
+                                   uri: path,
+                                   cache: 'force-cache'
+                               }}></Image></TouchableHighlight>
+                })}
+            </Carousel>
+        } else {
+            return null;
+        }
+    }
+
+    renderItemView({item}) {
+        return <HotItem img={item.img}/>
+    }
+    sepa() {
+        return (<View style={{width:5}}></View>)
+    }
+    hotView() {
+        if (this.state.hotList != null) {
+            return <FlatList
+                ItemSeparatorComponent={this.sepa}
+                style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
+                data={this.state.hotList}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={this.renderItemView}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}></FlatList>
+        } else {
+            return null;
+        }
+    }
 
     render() {
         return (
             <View>
-                {
-                    this.state.swiperList != null ? <Swiper
-                        height={200} showsButtons={false} autoplay={true}>
-                        {
-                            this.state.swiperList.map((item) => {
-                                let uri = "uri:" + "'" + item.videos[0].image + "'";
-                                console.log(uri);
-                            })
-                        }
-                    </Swiper> : null
-                }
+                {this.swiperView()}
+                {this.hotView()}
             </View>
         )
     }
