@@ -109,13 +109,17 @@ export default class MovieView extends Component<Props> {
             </Carousel>
     }
 
+    hotClick(item) {
+        console.log(item.movieId);
+    }
     renderItemView({item}) {
-        return <HotItem img={item.img}/>
+        return <HotItem item={item} onPress={this.hotClick}/>
     }
 
     sepa() {
         return (<View style={{width: 5}}></View>)
     }
+
 
     hotView() {
         return this.state.hotList != null &&
@@ -124,7 +128,7 @@ export default class MovieView extends Component<Props> {
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
                 data={this.state.hotList}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={this.renderItemView}
+                renderItem={this.renderItemView.bind(this)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }

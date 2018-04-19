@@ -5,20 +5,23 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    Image
+    Image,
+    TouchableHighlight
 } from 'react-native';
 
-export default class HotItem extends Component {
+export default class HotItem extends Component<Props> {
     constructor(props) {
         super();
-
     }
 
     render() {
-        console.log(this.props.img);
+        let item = this.props.item;
+        console.log(item.img);
         return (
             <View>
-                <Image source={{uri:this.props.img}} style={{height:200,width:100}}></Image>
+                <TouchableHighlight onPress={() => this.props.onPress(item)}>
+                    <Image source={{uri: item.img}} style={{height: 200, width: 100}}></Image>
+                </TouchableHighlight>
             </View>
         )
     }
