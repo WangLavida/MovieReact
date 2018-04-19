@@ -11,18 +11,16 @@ export default class http {
     static post(TAG, url, params, loadCallBack, callBackSuccess, callBackError) {
         loadCallBack();
 
-        console.log("start===" + TAG + url);
-
         let bodyStr = "";
-        let formData = new FormData();
+        let formData;
         if (params.size > 0) {
+            formData = new FormData();
             for (var item of params.entries()) {
                 bodyStr = bodyStr + item[0] + "=" + item[1] + "&";
                 formData.append(item[0], item[1]);
             }
-            console.log("请求参数===" + bodyStr);
         }
-
+        console.log("start===" + TAG + url + "?" + bodyStr);
         fetch(url, {
             method: 'POST',//如果为GET方式，则不要添加body，否则会出错    GET/POST
             header: {//请求头

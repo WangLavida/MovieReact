@@ -9,4 +9,5 @@ export default{
     secondaryText:'#757575',
     dividerText:'#BDBDBD',
     colorWhite:'#ffffff',
+    colorTransparent:'#00000000',
 }

@@ -8,6 +8,7 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
+import color from '../style/color'
 
 export default class HotItem extends Component<Props> {
     constructor(props) {
@@ -19,7 +20,8 @@ export default class HotItem extends Component<Props> {
         console.log(item.img);
         return (
             <View>
-                <TouchableHighlight onPress={() => this.props.onPress(item)}>
+                <TouchableHighlight onPress={() => this.props.onPress(item)} activeOpacity={1}
+                                    underlayColor={color.colorTransparent}>
                     <Image source={{uri: item.img}} style={{height: 200, width: 100}}></Image>
                 </TouchableHighlight>
             </View>

@@ -7,7 +7,8 @@ import {
     View,
     Image,
     TouchableHighlight,
-    FlatList
+    FlatList,
+    ScrollView
 } from 'react-native';
 import color from '../style/color'
 import NavigationItem from '../componet/NavigationItem'
@@ -41,7 +42,6 @@ export default class MovieView extends Component<Props> {
         this.state = {
             swiperList: null,
             hotList: null,
-            hotData: null,
             swiperWidth: 0
         }
         this.renderItemView = this.renderItemView.bind(this);
@@ -60,22 +60,17 @@ export default class MovieView extends Component<Props> {
         });
         http.post("正在售票", constant.hotMovies, params, () => {
         }, (response) => {
-            let dataBlob = [];
-            let i = 0;
-            response.movies.map(function (item) {
-                dataBlob.push({
-                    key: i,
-                    value: item.img,
-                })
-                i++;
-            });
             this.setState({
                 hotList: response.movies,
-                hotData: dataBlob
             });
         }, (error) => {
 
         });
+        var paramsTheaters = new Map();
+        paramsTheaters.set("apikey", "0b2bdeda43b5688921839c8ecb20399b");
+        paramsTheaters.set("city", "合肥");
+        paramsTheaters.set("start", "0");
+        paramsTheaters.set("count", "6");
     }
 
     swiperClick(id) {
@@ -119,7 +114,7 @@ export default class MovieView extends Component<Props> {
     }
 
     sepa() {
-        return (<View style={{width: 5}}></View>)
+        return (<View style={{width: 5, height: 5}}></View>)
     }
 
 
@@ -135,11 +130,25 @@ export default class MovieView extends Component<Props> {
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
 
+    sellView() {
+        return this.state.hotList != null &&
+            <FlatList
+                ItemSeparatorComponent={this.sepa}
+                style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
+                data={this.state.hotList}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={this.renderItemView}
+                showsHorizontalScrollIndicator={false}></FlatList>
+    }
+
     render() {
         return (
             <View>
-                {this.swiperView()}
-                {this.hotView()}
+                <ScrollView>
+                    {this.swiperView()}
+                    {this.hotView()}
+                    {this.sellView()}
+                </ScrollView>
             </View>
         )
     }
