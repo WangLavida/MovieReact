@@ -17,13 +17,14 @@ import http from '../common/http'
 import screen from '../common/screen'
 import Carousel from 'react-native-looped-carousel';
 import HotItem from '../componet/HotItem'
+import SellItem from '../componet/SellItem'
 
 export default class MovieView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '电影',
             headerTitleStyle: {
                 color: color.colorWhite,
-                alignSelf: 'center'
+                alignSelf: 'center',
             },
             headerStyle: {backgroundColor: color.colorPrimary},
             headerLeft: (
@@ -42,9 +43,10 @@ export default class MovieView extends Component<Props> {
         this.state = {
             swiperList: null,
             hotList: null,
-            swiperWidth: 0
+            sellList: null
         }
-        this.renderItemView = this.renderItemView.bind(this);
+        this.renderHotItemView = this.renderHotItemView.bind(this);
+        this.renderSellItemView = this.renderSellItemView.bind(this);
     }
 
     componentDidMount() {
@@ -71,6 +73,14 @@ export default class MovieView extends Component<Props> {
         paramsTheaters.set("city", "合肥");
         paramsTheaters.set("start", "0");
         paramsTheaters.set("count", "6");
+        http.post("正在上映", constant.theatersMovies, paramsTheaters, () => {
+        }, (response) => {
+            this.setState({
+                sellList: response.subjects,
+            });
+        }, (error) => {
+
+        });
     }
 
     swiperClick(id) {
@@ -109,7 +119,7 @@ export default class MovieView extends Component<Props> {
         console.log(item.movieId);
     }
 
-    renderItemView({item}) {
+    renderHotItemView({item}) {
         return <HotItem item={item} onPress={this.hotClick}/>
     }
 
@@ -125,19 +135,24 @@ export default class MovieView extends Component<Props> {
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
                 data={this.state.hotList}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={this.renderItemView}
+                renderItem={this.renderHotItemView}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
-
+    sellClick(item) {
+        console.log(item.id);
+    }
+    renderSellItemView({item}) {
+        return <SellItem item={item} onPress={this.sellClick}/>
+    }
     sellView() {
         return this.state.hotList != null &&
             <FlatList
                 ItemSeparatorComponent={this.sepa}
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
-                data={this.state.hotList}
+                data={this.state.sellList}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={this.renderItemView}
+                renderItem={this.renderSellItemView}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
 

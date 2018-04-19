@@ -4,7 +4,6 @@
 export default{
     colorPrimaryDark:'#1976D2',
     colorPrimary:'#2196F3',
-    colorPrimary:'#2196F3',
     primaryText:'#212121',
     secondaryText:'#757575',
     dividerText:'#BDBDBD',

@@ -22,7 +22,7 @@ export default class HotItem extends Component<Props> {
             <View>
                 <TouchableHighlight onPress={() => this.props.onPress(item)} activeOpacity={1}
                                     underlayColor={color.colorTransparent}>
-                    <Image source={{uri: item.img}} style={{height: 200, width: 100}}></Image>
+                    <Image source={{uri: item.img}} style={{height: 160, width: 100}}></Image>
                 </TouchableHighlight>
             </View>
         )
