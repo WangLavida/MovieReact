@@ -44,6 +44,7 @@ export default class MovieView extends Component<Props> {
             hotData: null,
             swiperWidth: 0
         }
+        this.renderItemView = this.renderItemView.bind(this);
     }
 
     componentDidMount() {
@@ -112,6 +113,7 @@ export default class MovieView extends Component<Props> {
     hotClick(item) {
         console.log(item.movieId);
     }
+
     renderItemView({item}) {
         return <HotItem item={item} onPress={this.hotClick}/>
     }
@@ -128,7 +130,7 @@ export default class MovieView extends Component<Props> {
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
                 data={this.state.hotList}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={this.renderItemView.bind(this)}
+                renderItem={this.renderItemView}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
