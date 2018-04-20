@@ -18,7 +18,9 @@ import screen from '../common/screen'
 import Carousel from 'react-native-looped-carousel';
 import HotItem from '../componet/HotItem'
 import SellItem from '../componet/SellItem'
+import IndicatorView from '../componet/IndicatorView'
 
+let pageNo = 0;
 export default class MovieView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '电影',
@@ -43,14 +45,21 @@ export default class MovieView extends Component<Props> {
         this.state = {
             swiperList: null,
             hotList: null,
-            sellList: null
+            sellList: null,
+            sellType: 0
         }
         this.renderHotItemView = this.renderHotItemView.bind(this);
         this.renderSellItemView = this.renderSellItemView.bind(this);
+        this.renderFooter = this.renderFooter.bind(this);
     }
 
     componentDidMount() {
-        var params = new Map();
+        // this.getMovies();
+        this.getSellData();
+    }
+
+    getMovies() {
+        let params = new Map();
         params.set("locationId", "295");
         http.post("即将上映", constant.comingNew, params, () => {
         }, (response) => {
@@ -68,12 +77,15 @@ export default class MovieView extends Component<Props> {
         }, (error) => {
 
         });
-        var paramsTheaters = new Map();
-        paramsTheaters.set("apikey", "0b2bdeda43b5688921839c8ecb20399b");
-        paramsTheaters.set("city", "合肥");
-        paramsTheaters.set("start", "0");
-        paramsTheaters.set("count", "6");
-        http.post("正在上映", constant.theatersMovies, paramsTheaters, () => {
+    }
+
+    getSellData() {
+        let params = new Map();
+        params.set("apikey", "0b2bdeda43b5688921839c8ecb20399b");
+        params.set("city", "合肥");
+        params.set("start", pageNo);
+        params.set("count", "6");
+        http.post("正在上映", constant.theatersMovies, params, () => {
         }, (response) => {
             this.setState({
                 sellList: response.subjects,
@@ -139,20 +151,32 @@ export default class MovieView extends Component<Props> {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
+
     sellClick(item) {
         console.log(item.id);
     }
+
     renderSellItemView({item}) {
         return <SellItem item={item} onPress={this.sellClick}/>
     }
+
+    endReached() {
+
+    }
+
+    renderFooter() {
+        return <IndicatorView showType={this.state.sellType}/>
+    }
+
     sellView() {
-        return this.state.hotList != null &&
+        return this.state.sellList != null &&
             <FlatList
                 ItemSeparatorComponent={this.sepa}
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
                 data={this.state.sellList}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={this.renderSellItemView}
+                ListFooterComponent={this.renderFooter()}
                 showsHorizontalScrollIndicator={false}></FlatList>
     }
 
