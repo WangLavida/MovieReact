@@ -18,20 +18,38 @@ export default class SellItem extends Component {
 
     render() {
         let item = this.props.item;
+        let casts = "";
+        item.casts.map((cast) => {
+            casts = casts + cast.name + ",";
+        })
         return (
-
             <TouchableHighlight onPress={() => this.props.onPress(item)} activeOpacity={1}
                                 underlayColor={color.colorTransparent}>
                 <View style={styles.container}>
                     <Image source={{uri: item.images.small}} style={{height: 120, width: 80}}></Image>
                     <View style={styles.midContainer}>
                         <View style={{flexDirection: "row"}}>
-                            <Text style={{fontSize: 20, color: color.primaryText}}>{item.title}</Text>
-                            {item.genres.map((genre) => {
-                                return <View style={styles.genre}><Text
+                            <Text style={{
+                                fontSize: 20,
+                                color: color.primaryText,
+                                alignSelf: "flex-end"
+                            }}>{item.title}</Text>
+                            {item.genres.map((genre, i) => {
+                                return <View style={styles.genre} key={i}><Text
                                     style={{fontSize: 10, color: color.colorWhite}}>{genre}</Text></View>
                             })}
                         </View>
+                        <Text style={{
+                            fontSize: 14,
+                            color: color.secondaryText,
+                            marginTop: 5
+                        }}>导演：{item.directors[0].name}</Text>
+                        <Text style={{
+                            fontSize: 12,
+                            color: color.secondaryText,
+                            marginTop: 5,
+                            paddingRight: 100
+                        }}>主演：{casts}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -47,16 +65,16 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         flexDirection: "column",
-        flex: 1,
         justifyContent: "center",
     },
     genre: {
-        flexDirection: "row",
+        height: 20,
         marginLeft: 5,
         paddingLeft: 5,
         paddingRight: 5,
         justifyContent: "center",
-        backgroundColor: color.dividerText,
+        backgroundColor: color.colorPrimary,
         borderRadius: 5,
+        alignSelf: "flex-end"
     },
 });
