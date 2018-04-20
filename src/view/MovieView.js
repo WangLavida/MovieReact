@@ -45,16 +45,18 @@ export default class MovieView extends Component<Props> {
         this.state = {
             swiperList: null,
             hotList: null,
-            sellList: null,
+            sellList: [],
             sellType: 0
         }
         this.renderHotItemView = this.renderHotItemView.bind(this);
         this.renderSellItemView = this.renderSellItemView.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
+        this.endReached = this.endReached.bind(this);
+        this.contentViewScroll = this.contentViewScroll.bind(this);
     }
 
     componentDidMount() {
-        // this.getMovies();
+        this.getMovies();
         this.getSellData();
     }
 
@@ -84,11 +86,12 @@ export default class MovieView extends Component<Props> {
         params.set("apikey", "0b2bdeda43b5688921839c8ecb20399b");
         params.set("city", "合肥");
         params.set("start", pageNo);
-        params.set("count", "6");
+        params.set("count", "10");
         http.post("正在上映", constant.theatersMovies, params, () => {
         }, (response) => {
             this.setState({
-                sellList: response.subjects,
+                sellList: this.state.sellList.concat(response.subjects),
+                sellType: 0
             });
         }, (error) => {
 
@@ -161,7 +164,32 @@ export default class MovieView extends Component<Props> {
     }
 
     endReached() {
+        console.log(this.state.sellType);
+        if (this.state.sellType != 1) {
+            pageNo++;
+            this.setState({
+                sellType: 1
+            });
+            this.getSellData();
+        }
+    }
 
+    contentViewScroll(e) {
+        console.log("1");
+        var offsetY = e.nativeEvent.contentOffset.y; //滑动距离
+        var contentSizeHeight = e.nativeEvent.contentSize.height; //scrollView contentSize高度
+        var oriageScrollHeight = e.nativeEvent.layoutMeasurement.height; //scrollView高度
+        console.log(offsetY + "=" + contentSizeHeight + "=" + oriageScrollHeight);
+        if ((offsetY + oriageScrollHeight + 20) >= contentSizeHeight) {
+            console.log("1");
+            if (this.state.sellType != 1) {
+                pageNo++;
+                this.setState({
+                    sellType: 1
+                });
+                this.getSellData();
+            }
+        }
     }
 
     renderFooter() {
@@ -169,7 +197,7 @@ export default class MovieView extends Component<Props> {
     }
 
     sellView() {
-        return this.state.sellList != null &&
+        return this.state.sellList.length != 0 &&
             <FlatList
                 ItemSeparatorComponent={this.sepa}
                 style={{marginTop: 5, marginLeft: 5, marginRight: 5}}
@@ -177,13 +205,17 @@ export default class MovieView extends Component<Props> {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={this.renderSellItemView}
                 ListFooterComponent={this.renderFooter()}
-                showsHorizontalScrollIndicator={false}></FlatList>
+                // onEndReached={this.endReached}
+                // onEndReachedThreshold={0.1}
+                showsHorizontalScrollIndicator={false}
+            ></FlatList>
     }
 
     render() {
         return (
             <View>
-                <ScrollView>
+                <ScrollView
+                    onScroll={this.contentViewScroll}>
                     {this.swiperView()}
                     {this.hotView()}
                     {this.sellView()}
