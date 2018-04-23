@@ -49,7 +49,7 @@ export default class ToolsView extends Component<Props> {
 
     setData() {
         return <FlatList
-            ItemSeparatorComponent={this.sepa}
+            // ItemSeparatorComponent={this.sepa}
             numColumns={3}
             // columnWrapperStyle={{borderWidth:2,borderColor:'black',paddingLeft:20}}
             data={this.getData()}
@@ -62,7 +62,8 @@ export default class ToolsView extends Component<Props> {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: 'white'
+                padding:2
+                // backgroundColor: 'white'
             }}>
                 {this.setData()}
             </View>

@@ -11,7 +11,7 @@ import {
 import color from "../style/color";
 import screen from "../common/screen";
 
-let width = (screen.width - 12) / 3;
+let width = (screen.width) / 3;
 export default class ToolItem extends Component {
     render() {
         let item = this.props.item;
@@ -21,6 +21,8 @@ export default class ToolItem extends Component {
                 <TouchableHighlight onPress={() => this.props.onPress(item)} activeOpacity={1}
                                     underlayColor={color.colorTransparent}>
                     <View style={{
+                        margin: 2,
+                        backgroundColor: color.colorWhite,
                         justifyContent: 'center',
                         alignItems: 'center',
                         width: width,
