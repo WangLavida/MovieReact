@@ -59,7 +59,8 @@ export default class SellItem extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row"
+        flexDirection: "row",
+        backgroundColor:'white'
     },
     midContainer: {
         paddingLeft: 10,
