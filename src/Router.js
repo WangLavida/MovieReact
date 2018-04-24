@@ -15,6 +15,7 @@ import SideMenu from './view/SideMenu'
 import MovieView from './view/MovieView'
 import ToolsView from './view/ToolsView'
 import AboutView from './view/AboutView'
+import NewsView from './view/NewsView'
 import TabBarItem from './componet/TabBarItem'
 import Splash from './view/Splash'
 import color from './style/color'
@@ -35,22 +36,38 @@ const Tab = TabNavigator({
             }
         )
     },
-    Tools: {
-        screen: ToolsView,
+    News: {
+        screen: NewsView,
         navigationOptions: ({navigation}) => ({
-                title: "工具",
-                tabBarLabel: "工具",
+                title: "新闻",
+                tabBarLabel: "新闻",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require("./image/tool_nor.png")}
-                        selectedImage={require("./image/tool_sel.png")}
+                        normalImage={require("./image/news_nor.png")}
+                        selectedImage={require("./image/news_sel.png")}
                     />
                 )
             }
         )
     },
+    // Tools: {
+    //     screen: ToolsView,
+    //     navigationOptions: ({navigation}) => ({
+    //             title: "工具",
+    //             tabBarLabel: "工具",
+    //             tabBarIcon: ({focused, tintColor}) => (
+    //                 <TabBarItem
+    //                     tintColor={tintColor}
+    //                     focused={focused}
+    //                     normalImage={require("./image/tool_nor.png")}
+    //                     selectedImage={require("./image/tool_sel.png")}
+    //                 />
+    //             )
+    //         }
+    //     )
+    // },
     About: {
         screen: AboutView,
         navigationOptions: ({navigation}) => ({

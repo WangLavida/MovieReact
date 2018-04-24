@@ -13,4 +13,5 @@ export default{
     comingNew:"https://api-m.mtime.cn/Movie/MovieComingNew.api",
     hotMovies:"https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api",
     theatersMovies:"https://api.douban.com/v2/movie/in_theaters",
+    news:"http://is.snssdk.com/api/news/feed/v51/",
 }
