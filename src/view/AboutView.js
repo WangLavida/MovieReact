@@ -4,10 +4,12 @@
 import React, {Component} from 'react';
 import {
     Text,
-    View
+    View,
+    WebView
 } from 'react-native';
 import color from "../style/color";
 import NavigationItem from '../componet/NavigationItem'
+
 export default class AboutView extends Component<Props> {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '关于',
@@ -26,10 +28,13 @@ export default class AboutView extends Component<Props> {
             ),
         }
     )
+
     render() {
         return (
-            <View>
-                <Text>AboutView</Text>
+            <View style={{flex: 1}}>
+                <WebView
+                    style={{flex: 1}}
+                    source={{uri: "https://github.com/WangLavida/MovieReact", method: 'GET'}}></WebView>
             </View>
         )
     }
