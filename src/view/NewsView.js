@@ -15,16 +15,19 @@ import http from "../common/http";
 import constant from "../common/constant";
 import NewsTab from "../componet/NewsTabView"
 
-let tabData = [{category: "news_world", name: "国际"}, {
-    category: "news_sport",
-    name: "体育"
+let tabData = [{
+    category: "__all__",
+    name: "推荐"
+}, {category: "news_hot", name: "热点"}, {category: "news_world", name: "国际"}, {
+    category: "news_military",
+    name: "军事"
+}, {category: "news_tech", name: "科技"}, {
+    category: "news_society",
+    name: "社会"
 }, {
-    category: "news_finance",
-    name: "财经"
-}, {category: "news_military", name: "军事"}, {category: "news_tech", name: "科技"}, {
-    category: "news_car",
-    name: "汽车"
-}, {category: "question_and_answer", name: "问答"}];
+    category: "news_sports",
+    name: "体育"
+}];
 export default class NewsView extends Component {
     static navigationOptions = ({navigation, props}) => ({
             headerTitle: '新闻',
