@@ -11,12 +11,13 @@ import {
 import color from "../style/color"
 import MenuItem from "../componet/MenuItem"
 import {
-    DrawerNavigator ,
-    DrawerItems ,
+    DrawerNavigator,
+    DrawerItems,
 } from 'react-navigation';
+
 var navigation = null;
 export default class SideMenu extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         navigation = this.props.navigation;
@@ -24,6 +25,10 @@ export default class SideMenu extends Component {
 
     homeClick() {
         navigation.navigate('DrawerClose');
+    }
+
+    themeClick() {
+        console.log("theme");
     }
 
     render() {
@@ -35,6 +40,7 @@ export default class SideMenu extends Component {
                     <Text style={styles.top_text}>一曲肝肠断</Text>
                 </View>
                 <MenuItem title="首页" icon={require("../image/home.png")} itemClick={this.homeClick}/>
+                <MenuItem title="主题" icon={require("../image/theme.png")} itemClick={this.themeClick}/>
             </View>
         )
     }
