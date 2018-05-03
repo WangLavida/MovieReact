@@ -1,4 +1,4 @@
 import {AppRegistry} from 'react-native';
 import Router from './src/Router';
-
-AppRegistry.registerComponent('MovieReact', () => Router);
+import App from './App'
+AppRegistry.registerComponent('MovieReact', () => App);

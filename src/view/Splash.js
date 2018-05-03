@@ -27,17 +27,18 @@ export default class Splash extends Component<Props> {
     }
 
     componentDidMount() {
-        this.timer = setInterval(() => {
-            console.log(time + "");
-            time = time - 1;
-            let timeStr = time > 0 ? time + "秒" : "跳过";
-            this.setState({
-                timeText: timeStr
-            })
-            if (time == 0) {
-                clearInterval(this.timer);
-            }
-        }, 1000)
+        this.props.navigation.navigate('DrawerMain');
+        // this.timer = setInterval(() => {
+        //     console.log(time + "");
+        //     time = time - 1;
+        //     let timeStr = time > 0 ? time + "秒" : "跳过";
+        //     this.setState({
+        //         timeText: timeStr
+        //     })
+        //     if (time == 0) {
+        //         clearInterval(this.timer);
+        //     }
+        // }, 1000)
     }
 
     initMian() {
