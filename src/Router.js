@@ -25,6 +25,7 @@ const Tab = TabNavigator({
         screen: MovieView,
         navigationOptions: ({navigation}) => ({
                 tabBarLabel: "电影",
+                header: null,
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
                         tintColor={tintColor}
@@ -40,6 +41,7 @@ const Tab = TabNavigator({
         screen: NewsView,
         navigationOptions: ({navigation}) => ({
                 title: "新闻",
+                header: null,
                 tabBarLabel: "新闻",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem
@@ -72,6 +74,7 @@ const Tab = TabNavigator({
         screen: AboutView,
         navigationOptions: ({navigation}) => ({
                 title: "关于",
+                header: null,
                 tabBarLabel: "关于",
                 tabBarIcon: ({focused, tintColor}) => (
                     <TabBarItem

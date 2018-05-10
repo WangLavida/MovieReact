@@ -14,6 +14,8 @@ import NewsItem from '../componet/NewsItem'
 import http from "../common/http";
 import constant from "../common/constant";
 import NewsTab from "../componet/NewsTabView"
+import {connect} from "react-redux";
+import HeadBar from '../componet/HeadBar'
 
 let tabData = [{
     category: "__all__",
@@ -28,24 +30,26 @@ let tabData = [{
     category: "news_sports",
     name: "体育"
 }];
-export default class NewsView extends Component {
-    static navigationOptions = ({navigation, props}) => ({
-            headerTitle: '新闻',
-            headerTitleStyle: {
-                color: color.colorWhite,
-                alignSelf: 'center'
-            },
-            headerStyle: {backgroundColor: color.colorPrimary},
-            headerLeft: (
-                <NavigationItem
-                    icon={require("../image/menu.png")}
-                    onPress={() => {
-                        navigation.navigate('DrawerToggle');
-                    }}
-                />
-            ),
-        }
-    )
+let navigation;
+
+class NewsView extends Component {
+    // static navigationOptions = ({navigation, props}) => ({
+    //         headerTitle: '新闻',
+    //         headerTitleStyle: {
+    //             color: color.colorWhite,
+    //             alignSelf: 'center'
+    //         },
+    //         headerStyle: {backgroundColor: color.colorPrimary},
+    //         headerLeft: (
+    //             <NavigationItem
+    //                 icon={require("../image/menu.png")}
+    //                 onPress={() => {
+    //                     navigation.navigate('DrawerToggle');
+    //                 }}
+    //             />
+    //         ),
+    //     }
+    // )
 
     constructor(props) {
         super();
@@ -53,6 +57,11 @@ export default class NewsView extends Component {
             newsData: []
         }
         this.setTab = this.setTab.bind(this);
+        this.leftClick = this.leftClick.bind(this);
+    }
+
+    leftClick() {
+        navigation.navigate('DrawerToggle')
     }
 
     onRefresh(i) {
@@ -79,8 +88,14 @@ export default class NewsView extends Component {
     }
 
     render() {
+        console.log(this.props.themeColor);
         return (
             this.setTab()
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    themeColor: state.theme.themeColor
+})
+export default connect(mapStateToProps)(NewsView)

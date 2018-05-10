@@ -19,26 +19,29 @@ import Carousel from 'react-native-looped-carousel';
 import HotItem from '../componet/HotItem'
 import SellItem from '../componet/SellItem'
 import IndicatorView from '../componet/IndicatorView'
+import {connect} from 'react-redux'
+import HeadBar from '../componet/HeadBar'
 
 let pageNo = 0;
-export default class MovieView extends Component<Props> {
-    static navigationOptions = ({navigation, props}) => ({
-            headerTitle: '电影',
-            headerTitleStyle: {
-                color: color.colorWhite,
-                alignSelf: 'center',
-            },
-            headerStyle: {backgroundColor: color.colorPrimary},
-            headerLeft: (
-                <NavigationItem
-                    icon={require("../image/menu.png")}
-                    onPress={() => {
-                        navigation.navigate('DrawerToggle');
-                    }}
-                />
-            ),
-        }
-    )
+let navigation;
+class MovieView extends Component{
+    // static navigationOptions = ({navigation, props}) => ({
+    //         headerTitle: '电影',
+    //         headerTitleStyle: {
+    //             color: color.colorWhite,
+    //             alignSelf: 'center',
+    //         },
+    //         headerStyle: {backgroundColor: color.colorPrimary},
+    //         headerLeft: (
+    //             <NavigationItem
+    //                 icon={require("../image/menu.png")}
+    //                 onPress={() => {
+    //                     navigation.navigate('DrawerToggle');
+    //                 }}
+    //             />
+    //         ),
+    //     }
+    // )
 
     constructor(props) {
         super();
@@ -46,18 +49,25 @@ export default class MovieView extends Component<Props> {
             swiperList: null,
             hotList: null,
             sellList: [],
-            sellType: 0
+            sellType: 0,
         }
+
         this.renderHotItemView = this.renderHotItemView.bind(this);
         this.renderSellItemView = this.renderSellItemView.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
         this.endReached = this.endReached.bind(this);
         this.contentViewScroll = this.contentViewScroll.bind(this);
+        this.leftClick = this.leftClick.bind(this);
+
     }
 
     componentDidMount() {
         this.getMovies();
         this.getSellData();
+    }
+
+    leftClick() {
+        navigation.navigate('DrawerToggle')
     }
 
     getMovies() {
@@ -212,8 +222,10 @@ export default class MovieView extends Component<Props> {
     }
 
     render() {
+        navigation = this.props.navigation;
         return (
             <View>
+                <HeadBar title="电影" leftClick={this.leftClick}/>
                 <ScrollView
                     onScroll={this.contentViewScroll}>
                     {this.swiperView()}
@@ -224,3 +236,8 @@ export default class MovieView extends Component<Props> {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    themeColor: state.theme.themeColor
+})
+export default connect(mapStateToProps)(MovieView)

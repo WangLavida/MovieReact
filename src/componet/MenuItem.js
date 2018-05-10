@@ -9,13 +9,14 @@ import {
     TouchableOpacity
 } from 'react-native';
 import color from "../style/color";
+import {connect} from "react-redux";
 
-export default class MenuItem extends Component {
+class MenuItem extends Component {
     render() {
         return (
             <TouchableOpacity style={styles.view} onPress={() => this.props.itemClick()}>
                 <Image source={this.props.icon}></Image>
-                <Text style={styles.text}>{this.props.title}</Text>
+                <Text style={[styles.text,{color: this.props.themeColor}]}>{this.props.title}</Text>
             </TouchableOpacity>
         )
     }
@@ -25,6 +26,10 @@ const styles = {
         flexDirection: 'row', marginLeft: 20, marginTop: 20, alignItems: 'center'
     },
     text: {
-        marginLeft: 10, color: color.colorPrimary, fontSize: 15
+        marginLeft: 10,  fontSize: 15
     }
 }
+const mapStateToProps = (state) => ({
+    themeColor: state.theme.themeColor
+})
+export default connect(mapStateToProps)(MenuItem)

@@ -6,8 +6,8 @@ import {
     Text,
     View
 } from 'react-native';
-import themeReducer from './themeReducer'
+import theme from './themeReducer'
 
-export default combineReducers({
-    theme: themeReducer
-})
+export {
+    theme
+};
