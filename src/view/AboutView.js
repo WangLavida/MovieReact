@@ -10,6 +10,7 @@ import {
 import color from "../style/color";
 import NavigationItem from '../componet/NavigationItem'
 import HeadBar from '../componet/HeadBar'
+import screen from '../common/screen'
 let navigation;
 export default class AboutView extends Component<Props> {
     // static navigationOptions = ({navigation, props}) => ({
@@ -39,11 +40,11 @@ export default class AboutView extends Component<Props> {
     render() {
         navigation = this.props.navigation;
         return (
-            <View>
+            <View  style={{flex: 1,width:screen.width,height:screen.height}}>
                 <HeadBar title="关于" leftClick={this.leftClick}/>
                 <WebView
                     style={{flex: 1}}
-                    source={{uri: "https://github.com/WangLavida/MovieReact", method: 'GET'}}></WebView>
+                    source={{uri: "https://www.baidu.com", method: 'GET'}}></WebView>
             </View>
         )
     }
