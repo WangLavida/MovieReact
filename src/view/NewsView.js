@@ -16,6 +16,7 @@ import constant from "../common/constant";
 import NewsTab from "../componet/NewsTabView"
 import {connect} from "react-redux";
 import HeadBar from '../componet/HeadBar'
+import screen from "../common/screen";
 
 let tabData = [{
     category: "__all__",
@@ -73,9 +74,9 @@ class NewsView extends Component {
             initialPage={0}
             renderTabBar={() => <DefaultTabBar/>}
             tabBarBackgroundColor={color.colorWhite}
-            tabBarActiveTextColor={color.colorPrimary}
+            tabBarActiveTextColor={this.props.themeColor}
             tabBarInactiveTextColor={color.dividerText}
-            tabBarUnderlineStyle={{backgroundColor: color.colorPrimary}}
+            tabBarUnderlineStyle={{backgroundColor: this.props.themeColor}}
             onChangeTab={(obj) => {
                 this.onRefresh(obj.i)
             }}
@@ -88,9 +89,12 @@ class NewsView extends Component {
     }
 
     render() {
-        console.log(this.props.themeColor);
+        navigation = this.props.navigation;
         return (
-            this.setTab()
+            <View style={{flex: 1}}>
+                <HeadBar title="新闻" leftClick={this.leftClick}/>
+                {this.setTab()}
+            </View>
         )
     }
 }

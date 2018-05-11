@@ -10,8 +10,9 @@ import {
     StyleSheet
 } from 'react-native';
 import color from "../style/color";
+import {connect} from "react-redux";
 
-export default class SellItem extends Component {
+class SellItem extends Component {
     constructor(props) {
         super();
     }
@@ -31,11 +32,11 @@ export default class SellItem extends Component {
                         <View style={{flexDirection: "row"}}>
                             <Text style={{
                                 fontSize: 20,
-                                color: color.primaryText,
+                                color: this.props.themeColor,
                                 alignSelf: "flex-end"
                             }}>{item.title}</Text>
                             {item.genres.map((genre, i) => {
-                                return <View style={styles.genre} key={i}><Text
+                                return <View style={[styles.genre,{backgroundColor: this.props.themeColor}]} key={i}><Text
                                     style={{fontSize: 10, color: color.colorWhite}}>{genre}</Text></View>
                             })}
                         </View>
@@ -74,8 +75,11 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         justifyContent: "center",
-        backgroundColor: color.colorPrimary,
         borderRadius: 5,
         alignSelf: "flex-end"
     },
 });
+const mapStateToProps = (state) => ({
+    themeColor: state.theme.themeColor
+})
+export default connect(mapStateToProps)(SellItem)
