@@ -225,7 +225,7 @@ class MovieView extends Component{
         navigation = this.props.navigation;
         return (
             <View>
-                <HeadBar title="电影" leftClick={this.leftClick}/>
+                <HeadBar title="Movie" leftClick={this.leftClick}/>
                 <ScrollView
                     onScroll={this.contentViewScroll}>
                     {this.swiperView()}
