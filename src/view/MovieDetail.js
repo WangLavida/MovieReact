@@ -72,17 +72,17 @@ class MovieDetail extends Component {
                         }}>{moment(movie.showDay).format('YYYY-MM-DD') + movie.releaseArea + "上映"}</Text>
                     </View>
                 </View>
-                <View style={{flexDirection: 'row',marginTop:10}}>
+                <View style={{flexDirection: 'row',marginTop:10,alignItems:'center',justifyContent:'space-between'}}>
                     <StarRating
                         disabled={false}
                         maxStars={5}
-                        rating={2.5}
-                        emptyStar={require('../image/menu.png')}
-                        fullStar={'ios-star'}
-                        halfStar={'ios-star-half'}
-                        iconSet={'Ionicons'}
+                        rating={movie.overallRating/2}
+                        emptyStar={require('../image/emptyStar.png')}
+                        fullStar={require('../image/fullStar.png')}
+                        halfStar={require('../image/halfStar.png')}
                     />
-                    <Text style={{fontSize: 16,color:color.secondaryText}}>{movie.overallRating+"分"}</Text>
+                    <Text style={{fontSize: 16,color:color.secondaryText, marginLeft:5}}>{movie.overallRating+"分"}</Text>
+                    <Text style={{fontSize: 16,color:color.secondaryText, marginLeft:5}}>{movie.personCount+"人评分"}</Text>
                 </View>
             </View>
     }
