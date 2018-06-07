@@ -13,7 +13,8 @@ import Tool from "../common/tool"
 import http from "../common/http";
 import constant from "../common/constant";
 import color from '../style/color'
-
+import moment from 'moment';
+import StarRating from 'react-native-star-rating';
 class MovieDetail extends Component {
     constructor(props) {
         super();
@@ -47,12 +48,42 @@ class MovieDetail extends Component {
 
     initView() {
         let movie = this.state.movie;
+        let typeStr = "";
+        if (this.state.movie != null) {
+            let type = movie.type;
+            type.map((item, i) => {
+                typeStr = typeStr + item + " ";
+            });
+        }
+
         return this.state.movie != null &&
             <View style={{backgroundColor: color.colorWhite, flex: 1, padding: 6}}>
-               <View style={{height: 160,flexDirection: 'row',backgroundColor:color.colorMovieBg}}>
-                   <Image style={{height: 160, width: 100}} source={{uri: movie.img}}></Image>
-                   <Text>Ha</Text>
-               </View>
+                <View style={{height: 160, flexDirection: 'row', backgroundColor: color.colorMovieBg}}>
+                    <Image style={{height: 160, width: 100}} source={{uri: movie.img}}></Image>
+                    <View style={{paddingLeft: 10, paddingTop: 10}}>
+                        <Text style={{fontSize: 18, color: color.colorWhite}}>{movie.name}</Text>
+                        <Text style={{fontSize: 14, color: color.colorWhite, paddingTop: 5}}>{movie.nameEn}</Text>
+                        <Text style={{fontSize: 14, color: color.colorWhite, paddingTop: 5}}>{typeStr}</Text>
+                        <Text style={{fontSize: 14, color: color.colorWhite, paddingTop: 5}}>{movie.mins}</Text>
+                        <Text style={{
+                            fontSize: 14,
+                            color: color.colorWhite,
+                            paddingTop: 5
+                        }}>{moment(movie.showDay).format('YYYY-MM-DD') + movie.releaseArea + "上映"}</Text>
+                    </View>
+                </View>
+                <View style={{flexDirection: 'row',marginTop:10}}>
+                    <StarRating
+                        disabled={false}
+                        maxStars={5}
+                        rating={2.5}
+                        emptyStar={require('../image/menu.png')}
+                        fullStar={'ios-star'}
+                        halfStar={'ios-star-half'}
+                        iconSet={'Ionicons'}
+                    />
+                    <Text style={{fontSize: 16,color:color.secondaryText}}>{movie.overallRating+"分"}</Text>
+                </View>
             </View>
     }
 

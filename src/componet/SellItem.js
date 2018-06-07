@@ -35,10 +35,12 @@ class SellItem extends Component {
                                 color: this.props.themeColor,
                                 alignSelf: "flex-end"
                             }}>{item.title}</Text>
-                            {item.genres.map((genre, i) => {
-                                return <View style={[styles.genre,{backgroundColor: this.props.themeColor}]} key={i}><Text
-                                    style={{fontSize: 10, color: color.colorWhite}}>{genre}</Text></View>
-                            })}
+                        </View>
+                        <View style={{flexDirection: "row"}}>
+                        {item.genres.map((genre, i) => {
+                            return <View style={[styles.genre,{backgroundColor: this.props.themeColor}]} key={i}><Text
+                                style={{fontSize: 10, color: color.colorWhite}}>{genre}</Text></View>
+                        })}
                         </View>
                         <Text style={{
                             fontSize: 14,
