@@ -16,6 +16,7 @@ import MovieView from './view/MovieView'
 import ToolsView from './view/ToolsView'
 import AboutView from './view/AboutView'
 import NewsView from './view/NewsView'
+import MovieDetail from './view/MovieDetail'
 import TabBarItem from './componet/TabBarItem'
 import Splash from './view/Splash'
 import color from './style/color'
@@ -122,6 +123,12 @@ export default Start = StackNavigator({
     },
     DrawerMain: {
         screen: Drawer,
+        navigationOptions: {
+            header: null
+        }
+    },
+    MovieDetail: {
+        screen: MovieDetail,
         navigationOptions: {
             header: null
         }

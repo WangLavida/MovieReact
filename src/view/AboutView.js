@@ -44,7 +44,7 @@ export default class AboutView extends Component<Props> {
                 <HeadBar title="关于" leftClick={this.leftClick}/>
                 <WebView
                     style={{flex: 1}}
-                    source={{uri: "https://www.baidu.com", method: 'GET'}}></WebView>
+                    source={{uri: "https://github.com/WangLavida", method: 'GET'}}></WebView>
             </View>
         )
     }

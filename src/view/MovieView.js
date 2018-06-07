@@ -142,6 +142,7 @@ class MovieView extends Component{
 
     hotClick(item) {
         console.log(item.movieId);
+        navigation.navigate('MovieDetail',{id:item.movieId,name:item.titleCn});
     }
 
     renderHotItemView({item}) {

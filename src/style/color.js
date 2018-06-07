@@ -10,4 +10,5 @@ export default{
     dividerText:'#BDBDBD',
     colorWhite:'#ffffff',
     colorTransparent:'#00000000',
+    colorMovieBg:'#fabd3a',
 }

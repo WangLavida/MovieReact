@@ -14,6 +14,7 @@ export default{
     hotMovies:"https://api-m.mtime.cn/PageSubArea/HotPlayMovies.api",
     theatersMovies:"https://api.douban.com/v2/movie/in_theaters",
     news:"https://m.toutiao.com/list/",
+    mDetail:"https://ticket-api-m.mtime.cn/movie/detail.api",
 }
 
     //  获取新闻：https://m.toutiao.com/list/?tag=新闻类型&ac=wap&count=20&format=json_raw&as=A125A8CEDCF8987&cp=58EC18F948F79E1&min_behot_time=时间

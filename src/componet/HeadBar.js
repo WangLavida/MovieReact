@@ -16,7 +16,9 @@ class HeadBar extends Component {
     constructor(props) {
         super();
     }
-
+    static defaultProps = {
+        leftImg:require("../image/menu.png")
+    }
     render() {
         const {themeColor} = this.props;
         return (
@@ -28,7 +30,7 @@ class HeadBar extends Component {
                 alignItems: "center"
             }}>
                 <TouchableOpacity onPress={() => this.props.leftClick()}>
-                    <Image source={require("../image/menu.png")} style={{height: 35, width: 35}}></Image>
+                    <Image source={this.props.leftImg} style={{height: 35, width: 35}}></Image>
                 </TouchableOpacity>
                 <View style={{
                     flex: 1,
