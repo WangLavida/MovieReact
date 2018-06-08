@@ -8,6 +8,7 @@ import {
     Image
 } from 'react-native';
 import HeadBar from '../componet/HeadBar'
+import CollapsibleText from '../componet/CollapsibleText'
 import {connect} from "react-redux";
 import Tool from "../common/tool"
 import http from "../common/http";
@@ -72,8 +73,9 @@ class MovieDetail extends Component {
                         }}>{moment(movie.showDay).format('YYYY-MM-DD') + movie.releaseArea + "上映"}</Text>
                     </View>
                 </View>
-                <View style={{flexDirection: 'row',marginTop:10,alignItems:'center',justifyContent:'space-between'}}>
+                <View style={{flexDirection: 'row',marginTop:10, marginBottom: 10,alignItems:'center',justifyContent:'space-around'}}>
                     <StarRating
+                        starSize={25}
                         disabled={false}
                         maxStars={5}
                         rating={movie.overallRating/2}
@@ -84,6 +86,7 @@ class MovieDetail extends Component {
                     <Text style={{fontSize: 16,color:color.secondaryText, marginLeft:5}}>{movie.overallRating+"分"}</Text>
                     <Text style={{fontSize: 16,color:color.secondaryText, marginLeft:5}}>{movie.personCount+"人评分"}</Text>
                 </View>
+                <CollapsibleText numberOfLines={2}>简介：{movie.story}</CollapsibleText>
             </View>
     }
 
