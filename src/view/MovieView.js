@@ -108,8 +108,9 @@ class MovieView extends Component{
         });
     }
 
-    swiperClick(id) {
-        console.log(id);
+    swiperClick(item) {
+        console.log(item.id);
+        navigation.navigate('MovieDetail',{id:item.id,name:item.title});
     }
 
     swiperView() {
@@ -126,7 +127,7 @@ class MovieView extends Component{
                 {this.state.swiperList.map((item, i) => {
                     let path = item.videos[0].image;
                     console.log(path);
-                    return <TouchableHighlight onPress={this.swiperClick.bind(this, item.id)} key={i}>
+                    return <TouchableHighlight onPress={this.swiperClick.bind(this, item)} key={i}>
                         <Image resizeMode="stretch"
                                style={{
                                    width: screen.width,
@@ -223,6 +224,12 @@ class MovieView extends Component{
     }
 
     render() {
+        storage.save({
+            key:'theme',
+            data:{
+                color:"222"
+            }
+        })
         navigation = this.props.navigation;
         return (
             <View>
