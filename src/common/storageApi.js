@@ -6,7 +6,7 @@ import {
     Text,
     View
 } from 'react-native';
-
+import color from '../style/color'
 class storageApi extends Component {
     saveData(key, value){
         storage.save({
@@ -15,7 +15,7 @@ class storageApi extends Component {
             expires: null
         })
     }
-    loadData(key){
+    loadData(key,callBack){
         // 读取
         storage.load({
             key: key,
@@ -42,14 +42,18 @@ class storageApi extends Component {
             // 而不能在then以外处理
             // 也没有办法“变成”同步返回
             // 你也可以使用“看似”同步的async/await语法
-            console.log(ret);
+            console.log("查询结果："+ret);
+            callBack(ret);
         }).catch(err => {
             //如果没有找到数据且没有sync方法，
             //或者有其他异常，则在catch中返回
+            console.log("查询失败");
             console.warn(err.message);
             switch (err.name) {
                 case 'NotFoundError':
+                    console.log("NotFoundError");
                     // TODO;
+                    callBack(color.colorPrimary);
                     break;
                 case 'ExpiredError':
                     // TODO

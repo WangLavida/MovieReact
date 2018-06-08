@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import color from '../style/color'
 import * as types from '../action/actionTypes';
+import storageApi from '../common/storageApi';
 
 const initialState = {
     themeColor: color.colorPrimary,
@@ -19,6 +20,7 @@ export default function setTheme(state = initialState, action) {
     console.log("type" + action.type);
     switch (action.type) {
         case types.SET_THEME:
+            storageApi.saveData(types.THEME,action.themeColor);
             return {
                 ...state,
                 themeColor: action.themeColor,
@@ -26,6 +28,7 @@ export default function setTheme(state = initialState, action) {
                 themeIcon: require("../image/theme.png")
             };
         case types.SET_THEME1:
+            storageApi.saveData(types.THEME,action.themeColor);
             return {
                 ...state,
                 themeColor: action.themeColor,

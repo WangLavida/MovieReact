@@ -21,10 +21,12 @@ import SellItem from '../componet/SellItem'
 import IndicatorView from '../componet/IndicatorView'
 import {connect} from 'react-redux'
 import HeadBar from '../componet/HeadBar'
-import storageApi from '../common/storageApi'
-
+import * as themeAction from "../action/themeActions";
+import storageApi from '../common/storageApi';
+import * as types from '../action/actionTypes';
 let pageNo = 0;
 let navigation;
+let mContext;
 class MovieView extends Component{
     // static navigationOptions = ({navigation, props}) => ({
     //         headerTitle: '电影',
@@ -52,7 +54,7 @@ class MovieView extends Component{
             sellList: [],
             sellType: 0,
         }
-
+        mContext = this;
         this.renderHotItemView = this.renderHotItemView.bind(this);
         this.renderSellItemView = this.renderSellItemView.bind(this);
         this.renderFooter = this.renderFooter.bind(this);
@@ -65,6 +67,9 @@ class MovieView extends Component{
     componentDidMount() {
         this.getMovies();
         this.getSellData();
+        storageApi.loadData(types.THEME,function callBack(theme){
+            mContext.props.changeTheme(theme);
+        })
     }
 
     leftClick() {
@@ -243,4 +248,7 @@ class MovieView extends Component{
 const mapStateToProps = (state) => ({
     themeColor: state.theme.themeColor
 })
-export default connect(mapStateToProps)(MovieView)
+const mapDispatchToProps = (dispatch) => ({
+    changeTheme: color => dispatch(themeAction.changeTheme(color))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(MovieView)

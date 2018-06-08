@@ -3,3 +3,4 @@
  */
 export const SET_THEME = 'SET_THEME';
 export const SET_THEME1 = 'SET_THEME1';
+export const THEME = 'THEME1';
