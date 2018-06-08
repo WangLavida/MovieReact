@@ -21,6 +21,7 @@ import SellItem from '../componet/SellItem'
 import IndicatorView from '../componet/IndicatorView'
 import {connect} from 'react-redux'
 import HeadBar from '../componet/HeadBar'
+import storageApi from '../common/storageApi'
 
 let pageNo = 0;
 let navigation;
@@ -224,12 +225,6 @@ class MovieView extends Component{
     }
 
     render() {
-        storage.save({
-            key:'theme',
-            data:{
-                color:"222"
-            }
-        })
         navigation = this.props.navigation;
         return (
             <View>
