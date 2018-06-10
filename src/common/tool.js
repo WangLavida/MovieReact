@@ -14,7 +14,7 @@ export default class tool {
         ToastAndroid.show(msg + "", ToastAndroid.LONG);
     }
 
-    static uploadFile(url, path,callBack) {
+    static uploadFile(url, path,loadBack,callBack) {
         const options = {
             fromUrl: url,
             toFile: path,
@@ -25,6 +25,7 @@ export default class tool {
             },
             progress: (res) => {
                 let pro = res.bytesWritten / res.contentLength;
+                loadBack(pro);
                 console.log(pro*100);
                 // this.setState({progressNum: pro,});
             }
@@ -42,10 +43,11 @@ export default class tool {
             console.log(error);
         }
     }
-    static unzipFile(sourcePath, targetPath){
+    static unzipFile(sourcePath, targetPath,callBack){
         unzip(sourcePath, targetPath)
             .then((path) => {
                 console.log(`unzip completed at ${path}`)
+                callBack();
             })
             .catch((error) => {
                 console.log(error)
