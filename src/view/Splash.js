@@ -27,7 +27,7 @@ export default class Splash extends Component<Props> {
     }
 
     componentDidMount() {
-        this.props.navigation.navigate('DrawerMain');
+        // this.props.navigation.navigate('DrawerMain');
         // this.timer = setInterval(() => {
         //     console.log(time + "");
         //     time = time - 1;
@@ -53,9 +53,9 @@ export default class Splash extends Component<Props> {
                 {/*<StatusBar hidden={true}/>*/}
                 <ImageBackground source={require("../image/splash.jpg")}
                                  style={style.imageBg} resizeMode='stretch'>
-                    <TouchableHighlight style={style.touchBg} onPress={this.initMian.bind(this)}>
-                        <Text style={style.textStyle}>{this.state.timeText}</Text>
-                    </TouchableHighlight>
+                    {/*<TouchableHighlight style={style.touchBg} onPress={this.initMian.bind(this)}>*/}
+                        {/*<Text style={style.textStyle}>{this.state.timeText}</Text>*/}
+                    {/*</TouchableHighlight>*/}
                 </ImageBackground>
             </View>
 

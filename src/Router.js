@@ -134,6 +134,6 @@ export default Start = StackNavigator({
         }
     }
 }, {
-    initialRouteName: 'DrawerMain',
+    initialRouteName: 'Splash',
 })
 
