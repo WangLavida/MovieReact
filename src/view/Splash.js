@@ -18,7 +18,7 @@ import screen from '../common/screen'
 import tool from '../common/tool'
 import http from '../common/http'
 import constant from "../common/constant";
-
+import RNFS from 'react-native-fs';
 var time = 5;
 export default class Splash extends Component<Props> {
     constructor(props) {
@@ -50,7 +50,13 @@ export default class Splash extends Component<Props> {
         }, (response) => {
              console.log(response.version);
              if(response.version>constant.version){
-                 console.log("更新");
+                 console.log("更新1");
+                 let path = `${RNFS.ExternalDirectoryPath}/bundle.zip`;
+                 let targetPath = `${RNFS.ExternalDirectoryPath}`;
+                 tool.uploadFile(response.url,path,function () {
+                     console.log("下载成功")
+                     tool.unzipFile(path,targetPath);
+                 });
              }else{
                  this.props.navigation.navigate('DrawerMain');
              }

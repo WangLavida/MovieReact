@@ -52,7 +52,6 @@ export default class http {
     }
 
     static get(TAG, url, params, loadCallBack, callBackSuccess, callBackError) {
-        console.log(params.size);
         if (params.size > 0) {
             url = url + "?";
             for (var item of params.entries()) {
