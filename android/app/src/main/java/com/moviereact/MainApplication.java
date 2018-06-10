@@ -63,7 +63,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     Log.i("onCreate","onCreate");
-    JS_PATH = getExternalFilesDir(null) + "/patches/";
+    JS_PATH = getExternalFilesDir(null)+"";
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

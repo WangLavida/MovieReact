@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 export default{
-    version:1,
+    version:2,
 
     hotCities:"https://api-m.mtime.cn/Showtime/HotCitiesByCinema.api",
     comingNew:"https://api-m.mtime.cn/Movie/MovieComingNew.api",
