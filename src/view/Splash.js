@@ -16,6 +16,8 @@ import {styles} from '../style/style'
 import color from '../style/color'
 import screen from '../common/screen'
 import tool from '../common/tool'
+import http from '../common/http'
+import constant from "../common/constant";
 
 var time = 5;
 export default class Splash extends Component<Props> {
@@ -39,6 +41,22 @@ export default class Splash extends Component<Props> {
         //         clearInterval(this.timer);
         //     }
         // }, 1000)
+        this.checkUpload();
+    }
+
+    checkUpload() {
+        let params = new Map();
+        http.get("更新", constant.uploadUrl, params, () => {
+        }, (response) => {
+             console.log(response.version);
+             if(response.version>constant.version){
+                 console.log("更新");
+             }else{
+                 this.props.navigation.navigate('DrawerMain');
+             }
+        }, (error) => {
+
+        })
     }
 
     initMian() {
@@ -54,7 +72,7 @@ export default class Splash extends Component<Props> {
                 <ImageBackground source={require("../image/splash.jpg")}
                                  style={style.imageBg} resizeMode='stretch'>
                     {/*<TouchableHighlight style={style.touchBg} onPress={this.initMian.bind(this)}>*/}
-                        {/*<Text style={style.textStyle}>{this.state.timeText}</Text>*/}
+                    {/*<Text style={style.textStyle}>{this.state.timeText}</Text>*/}
                     {/*</TouchableHighlight>*/}
                 </ImageBackground>
             </View>
