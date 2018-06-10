@@ -57,6 +57,7 @@ export default class Splash extends Component<Props> {
         http.get("更新", constant.uploadUrl, params, () => {
         }, (response) => {
             console.log(response.version);
+            console.log(constant.version);
             if (response.version > constant.version) {
                 console.log("更新");
                 this.showUpdate(response.url);
